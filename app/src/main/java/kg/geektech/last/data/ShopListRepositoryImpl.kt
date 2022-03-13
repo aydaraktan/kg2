@@ -7,16 +7,26 @@ import androidx.lifecycle.Observer
 import kg.geektech.last.domain.ShopItem
 import kg.geektech.last.domain.ShopListRepository
 import kg.geektech.last.rpesentation.MainViewModel
- class ShopListRepositoryImpl: ShopListRepository {
+import java.lang.RuntimeException
+import kotlin.random.Random
+
+class ShopListRepositoryImpl: ShopListRepository {
 
 
-    private val shopList = mutableListOf<ShopItem>()
-
+    private val shopList = sortedSetOf<ShopItem>({
+        o1,o2->o1.id.compareTo(o2.id)
+    })
     private val shopListLd = MutableLiveData<List<ShopItem>>()
 
      private val forEnabled = MutableLiveData<Boolean>()
 
-    private var autoIncrement = 0
+    private var autoIncrement = 1
+     init {
+         for (i in 1..20){
+             val item = ShopItem("name $i",i, Random.nextBoolean())
+             addShopItem(item)
+         }
+     }
 
     override fun addShopItem(shopItem: ShopItem) {
         if(shopItem.id==ShopItem.UNDEFINED_ID){
@@ -46,13 +56,15 @@ import kg.geektech.last.rpesentation.MainViewModel
     }
 
     override fun editShopItem(shopItem: ShopItem) {
-        shopItem.enabled=true
-        shopList[shopItem.id] = shopItem
-        update()
+        val oldShopItem = findShopItem(shopItem.id)
+        shopList.remove(oldShopItem)
+        addShopItem(shopItem)
     }
 
-    override fun findShopItem(shopItem: ShopItem) {
-        shopList[shopItem.id]
-        Log.e("TAG", "findShopItem: $shopItem", )
+    override fun findShopItem(id:Int):ShopItem {
+        return shopList.find {
+            it.id==id
+        }?:throw RuntimeException("shama")
+
     }
 }

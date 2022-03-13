@@ -1,7 +1,10 @@
 package kg.geektech.last.domain
 
+
+
 class FindItemUseCase(private val repository: ShopListRepository) {
-    fun findShopItem(shopItem: ShopItem){
-        repository.findShopItem(shopItem)
+
+    fun findShopItem(id: Int): ShopItem{
+       return repository.findShopItem(id)
     }
 }

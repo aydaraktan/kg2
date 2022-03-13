@@ -10,13 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Last">
         <activity
-            android:name=".rpesentation.MainActivity"
+            android:name=".rpesentation.task.TaskActivity2"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+    </activity>
+        <activity
+            android:name=".rpesentation.main.MainActivity"
+            android:exported="true">
+
         </activity>
     </application>
 

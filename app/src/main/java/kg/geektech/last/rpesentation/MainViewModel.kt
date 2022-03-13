@@ -33,11 +33,13 @@ class MainViewModel:ViewModel() {
     }
 
     fun editItem(shopItem: ShopItem) {
-        editShopItemUseCase.editShopItem(shopItem)
+        val newItem = shopItem.copy(enabled = !shopItem.enabled)
+        editShopItemUseCase.editShopItem(newItem)
+
     }
 
-    fun findItem(shopItem: ShopItem) {
-        findShopItemUseCase.findShopItem(shopItem)
+    fun findItem(id: Int): ShopItem {
+        return findShopItemUseCase.findShopItem(id)
     }
 
 }

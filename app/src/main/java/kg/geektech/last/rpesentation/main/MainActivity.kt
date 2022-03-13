@@ -1,4 +1,4 @@
-package kg.geektech.last.rpesentation
+package kg.geektech.last.rpesentation.main
 
 
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import kg.geektech.last.R
 import kg.geektech.last.databinding.ActivityMainBinding
 import kg.geektech.last.domain.ShopItem
+import kg.geektech.last.rpesentation.MainViewModel
 
 class MainActivity() : AppCompatActivity() {
 
@@ -20,8 +21,8 @@ class MainActivity() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initObservers()
-        initListeners()
+        //initObservers()
+       // initListeners()
     }
 
     private fun initObservers() {
@@ -47,9 +48,9 @@ class MainActivity() : AppCompatActivity() {
 
         }
 
-        binding.getFindBtn.setOnClickListener{
-            viewModel.findItem(ShopItem("potato",2,false,binding.forIdEt.text.toString().toInt()))
-        }
+//        binding.getFindBtn.setOnClickListener{
+//            viewModel.findItem(ShopItem("potato",2,false,binding.forIdEt.text.toString().toInt()))
+//        }
     }
 
     private fun addItem(): ShopItem {
