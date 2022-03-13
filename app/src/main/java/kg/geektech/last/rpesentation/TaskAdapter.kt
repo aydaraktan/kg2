@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import kg.geektech.last.R
 import kg.geektech.last.domain.ShopItem
-//Task adapter
+//Task adapters
 class TaskAdapter: RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
     var list = listOf<ShopItem>()
