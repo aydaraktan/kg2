@@ -2,8 +2,9 @@ package kg.geektech.last.rpesentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import kg.geektech.last.data.ShopListRepositoryImpl
+import kg.geektech.last.data.repositories.ShopListRepositoryImpl
 import kg.geektech.last.domain.*
+import kg.geektech.last.model.ShopItem
 
 class MainViewModel:ViewModel() {
 

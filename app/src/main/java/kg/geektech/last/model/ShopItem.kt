@@ -1,4 +1,4 @@
-package kg.geektech.last.domain
+package kg.geektech.last.model
 
 data class ShopItem(
     val name: String,

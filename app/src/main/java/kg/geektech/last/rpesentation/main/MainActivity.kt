@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import kg.geektech.last.R
 import kg.geektech.last.databinding.ActivityMainBinding
-import kg.geektech.last.domain.ShopItem
+import kg.geektech.last.model.ShopItem
 import kg.geektech.last.rpesentation.MainViewModel
 
 class MainActivity() : AppCompatActivity() {
@@ -38,7 +38,8 @@ class MainActivity() : AppCompatActivity() {
         }
 
         binding.deleteItemBtn.setOnClickListener{
-            viewModel.deleteItem(ShopItem("potato", 2, false, binding.forIdEt.text.toString().toInt())
+            viewModel.deleteItem(
+                ShopItem("potato", 2, false, binding.forIdEt.text.toString().toInt())
             )
         }
 

@@ -1,12 +1,9 @@
-package kg.geektech.last.data
+package kg.geektech.last.data.repositories
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import kg.geektech.last.domain.ShopItem
+import kg.geektech.last.model.ShopItem
 import kg.geektech.last.domain.ShopListRepository
-import kg.geektech.last.rpesentation.MainViewModel
 import java.lang.RuntimeException
 import kotlin.random.Random
 
@@ -29,7 +26,7 @@ class ShopListRepositoryImpl: ShopListRepository {
      }
 
     override fun addShopItem(shopItem: ShopItem) {
-        if(shopItem.id==ShopItem.UNDEFINED_ID){
+        if(shopItem.id== ShopItem.UNDEFINED_ID){
             shopItem.id = autoIncrement
             autoIncrement++
         }
@@ -61,7 +58,7 @@ class ShopListRepositoryImpl: ShopListRepository {
         addShopItem(shopItem)
     }
 
-    override fun findShopItem(id:Int):ShopItem {
+    override fun findShopItem(id:Int): ShopItem {
         return shopList.find {
             it.id==id
         }?:throw RuntimeException("shama")

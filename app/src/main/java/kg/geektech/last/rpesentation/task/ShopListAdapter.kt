@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kg.geektech.last.R
-import kg.geektech.last.domain.ShopItem
+import kg.geektech.last.model.ShopItem
 import androidx.recyclerview.widget.ListAdapter
 
 class ShopListAdapter: ListAdapter<ShopItem, ShopListAdapter.ViewHolder>(ShopItemDiffCallback()) {

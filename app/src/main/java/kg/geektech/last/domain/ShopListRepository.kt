@@ -1,6 +1,7 @@
 package kg.geektech.last.domain
 
 import androidx.lifecycle.LiveData
+import kg.geektech.last.model.ShopItem
 
 interface ShopListRepository {
     fun addShopItem(shopItem: ShopItem)

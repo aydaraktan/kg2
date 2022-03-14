@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import kg.geektech.last.R
-import kg.geektech.last.domain.ShopItem
+import kg.geektech.last.model.ShopItem
 //Task adapters
 class TaskAdapter: RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
