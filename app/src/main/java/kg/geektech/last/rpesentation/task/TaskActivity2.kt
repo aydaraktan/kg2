@@ -2,11 +2,9 @@ package kg.geektech.last.rpesentation.task
 
 import android.app.SearchManager
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -25,7 +23,8 @@ class TaskActivity2 : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
    // private lateinit var adapterTask: TaskAdapter
     private lateinit var shopListAdapter: ShopListAdapter
-    private lateinit var  shopItem: ShopItem
+    private lateinit var shopItem: ShopItem
+    private lateinit var  list2: ArrayList<ShopItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,33 +47,20 @@ class TaskActivity2 : AppCompatActivity() {
                 searchView.setQuery("",false)
                 searchItem.collapseActionView()
 
-                var lol=0
-                if (p0 != null) {
-                    lol = p0.toInt()
+                p0?.toInt()?.let {
+                    Toast.makeText(this@TaskActivity2,viewModel.findItem(it).toString(),Toast.LENGTH_LONG).show()
                 }
-
-                if(lol==shopItem.id){
-                Toast.makeText(this@TaskActivity2,"$p0",Toast.LENGTH_LONG).show()}
-                else  Toast.makeText(this@TaskActivity2,"такого ID нету",Toast.LENGTH_LONG).show()
                 return true
-
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
                 return false
             }
-
         })
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-
-
-
-        return true
-    }
 
     private fun initListener() {
         shopListAdapter.onShopItemClick ={
@@ -95,7 +81,9 @@ class TaskActivity2 : AppCompatActivity() {
     private fun initObservers() {
         viewModel.getShopLiveData().observe(this){
            // adapterTask.list=it
+            list2= it as ArrayList<ShopItem>
             shopListAdapter.submitList(it)
+
         }
     }
 
@@ -132,6 +120,4 @@ class TaskActivity2 : AppCompatActivity() {
         val itemTouchHelper = ItemTouchHelper(callback)
         itemTouchHelper.attachToRecyclerView(taskRv)
     }
-
-
 }

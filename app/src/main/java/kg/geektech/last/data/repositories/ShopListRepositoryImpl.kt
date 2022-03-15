@@ -59,6 +59,6 @@ class ShopListRepositoryImpl: ShopListRepository {
     }
 
     override fun findShopItem(id:Int): ShopItem {
-        TODO()
+      return  mapper.mapDbModelToEntity(App.dataBase.shopListDao().getShopItem(id))
     }
 }
