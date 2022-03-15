@@ -2,9 +2,14 @@ package kg.geektech.last.rpesentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kg.geektech.last.data.repositories.ShopListRepositoryImpl
 import kg.geektech.last.domain.*
 import kg.geektech.last.model.ShopItem
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 class MainViewModel:ViewModel() {
 
@@ -20,8 +25,12 @@ class MainViewModel:ViewModel() {
 
     private val shopList = getShopListUseCase.getShopList()
 
+
+
     fun addShopItem(shopItem: ShopItem){
-        addShopItemUseCase.addShopItem((shopItem))
+        viewModelScope.launch {
+            addShopItemUseCase.addShopItem(shopItem)
+        }
     }
 
     fun getShopLiveData(): LiveData<List<ShopItem>>{
@@ -30,17 +39,23 @@ class MainViewModel:ViewModel() {
 
 
     fun deleteItem(shopItem: ShopItem) {
-        deleteShopItemUseCase.deleteShopItem(shopItem)
+        viewModelScope.launch {
+            deleteShopItemUseCase.deleteShopItem(shopItem)
+        }
     }
 
     fun editItem(shopItem: ShopItem) {
-        val newItem = shopItem.copy(enabled = !shopItem.enabled)
-        editShopItemUseCase.editShopItem(newItem)
+        val newShopItem = shopItem.copy(enabled = !shopItem.enabled)
+        viewModelScope.launch {
+            editShopItemUseCase.editShopItem(newShopItem)
+        }
 
     }
 
-    fun findItem(id: Int): ShopItem {
+    suspend fun findItem(id: Int): ShopItem {
         return findShopItemUseCase.findShopItem(id)
     }
+
+
 
 }

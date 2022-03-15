@@ -8,6 +8,7 @@ import android.view.Menu
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -16,6 +17,7 @@ import kg.geektech.last.databinding.ActivityTask2Binding
 import kg.geektech.last.model.ShopItem
 import kg.geektech.last.rpesentation.DetailActivity
 import kg.geektech.last.rpesentation.MainViewModel
+import kotlinx.coroutines.launch
 
 class TaskActivity2 : AppCompatActivity() {
 
@@ -48,7 +50,13 @@ class TaskActivity2 : AppCompatActivity() {
                 searchItem.collapseActionView()
 
                 p0?.toInt()?.let {
-                    Toast.makeText(this@TaskActivity2,viewModel.findItem(it).toString(),Toast.LENGTH_LONG).show()
+                    lifecycleScope.launch {
+                        Toast.makeText(
+                            this@TaskActivity2,
+                            viewModel.findItem(it).toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
                 return true
             }
@@ -80,8 +88,7 @@ class TaskActivity2 : AppCompatActivity() {
 
     private fun initObservers() {
         viewModel.getShopLiveData().observe(this){
-           // adapterTask.list=it
-            list2= it as ArrayList<ShopItem>
+
             shopListAdapter.submitList(it)
 
         }

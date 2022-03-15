@@ -17,7 +17,7 @@ fun addShopItem(shopItemDbModel: ShopItemDbModel)
 fun getShopItem (shopItemId: Int): ShopItemDbModel
 
 @Query("DELETE FROM shop_item WHERE id = :shopItemId")
-fun deleteShopItem(shopItemId: Int)
+suspend fun deleteShopItem(shopItemId: Int)
 
 @Update
 fun updateShopItem(shopItemDbModel: ShopItemDbModel)

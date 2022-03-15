@@ -23,11 +23,11 @@ class ShopListRepositoryImpl: ShopListRepository {
 //    private var autoIncrement = 1
 
     private val mapper = ShopListMapper()
-     init {
-         for (i in 1..5){
-             addShopItem(ShopItem("name $i", count=i,false))
-         }
-     }
+//     init {
+//         for (i in 1..5){
+//             addShopItem(ShopItem("name $i", count=i,false))
+//         }
+//     }
 
 //    override fun addShopItem(shopItem: ShopItem) {
 //        if(shopItem.id== ShopItem.UNDEFINED_ID){
@@ -38,7 +38,7 @@ class ShopListRepositoryImpl: ShopListRepository {
 //        update()
 //    }
 
-    override fun addShopItem(shopItem: ShopItem) {
+    override suspend fun addShopItem(shopItem: ShopItem) {
         App.dataBase.shopListDao().addShopItem(mapper.mapEntityToDbModel(shopItem))
     }
 
@@ -50,15 +50,15 @@ class ShopListRepositoryImpl: ShopListRepository {
         mapper.mapListDbModelToListEntity(it)
     }
 
-    override fun deleteShopItem(shopItem: ShopItem) {
+    override suspend fun deleteShopItem(shopItem: ShopItem) {
         App.dataBase.shopListDao().deleteShopItem(shopItem.id)
     }
 
-    override fun editShopItem(shopItem: ShopItem) {
+    override suspend fun editShopItem(shopItem: ShopItem) {
         App.dataBase.shopListDao().updateShopItem(mapper.mapEntityToDbModel(shopItem))
     }
 
-    override fun findShopItem(id:Int): ShopItem {
+    override suspend fun findShopItem(id:Int): ShopItem {
       return  mapper.mapDbModelToEntity(App.dataBase.shopListDao().getShopItem(id))
     }
 }

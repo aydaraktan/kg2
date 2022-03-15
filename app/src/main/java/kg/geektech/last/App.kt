@@ -8,8 +8,8 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         dataBase = Room.databaseBuilder(this,AppDataBase::class.java,"dataBase")
-            .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
+            .allowMainThreadQueries()
             .build()
     }
     companion object{
