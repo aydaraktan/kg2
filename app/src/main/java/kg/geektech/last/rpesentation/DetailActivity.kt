@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kg.geektech.last.R
 import kg.geektech.last.databinding.ActivityDetailBinding
 import kg.geektech.last.model.ShopItem
 
+@AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
     private val binding: ActivityDetailBinding by viewBinding()
     private val viewModel: MainViewModel by viewModels()

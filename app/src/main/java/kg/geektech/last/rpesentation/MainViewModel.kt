@@ -3,6 +3,7 @@ package kg.geektech.last.rpesentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kg.geektech.last.data.repositories.ShopListRepositoryImpl
 import kg.geektech.last.domain.*
 import kg.geektech.last.model.ShopItem
@@ -10,12 +11,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel:ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repository: ShopListRepositoryImpl):ViewModel() {
 
 
 
-    private val repository = ShopListRepositoryImpl()
+
 
     private val addShopItemUseCase = AddShopItemUseCase(repository)
     private val getShopListUseCase = GetShopListUseCase(repository)
@@ -49,13 +52,9 @@ class MainViewModel:ViewModel() {
         viewModelScope.launch {
             editShopItemUseCase.editShopItem(newShopItem)
         }
-
     }
 
     suspend fun findItem(id: Int): ShopItem {
         return findShopItemUseCase.findShopItem(id)
     }
-
-
-
 }

@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kg.geektech.last.R
 import kg.geektech.last.databinding.ActivityTask2Binding
 import kg.geektech.last.model.ShopItem
@@ -19,6 +20,7 @@ import kg.geektech.last.rpesentation.DetailActivity
 import kg.geektech.last.rpesentation.MainViewModel
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class TaskActivity2 : AppCompatActivity() {
 
     private val binding: ActivityTask2Binding by viewBinding()

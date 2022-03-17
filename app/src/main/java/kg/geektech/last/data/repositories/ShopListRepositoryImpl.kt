@@ -4,13 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import kg.geektech.last.App
+import kg.geektech.last.data.ShopDao
 import kg.geektech.last.data.ShopListMapper
 import kg.geektech.last.model.ShopItem
 import kg.geektech.last.domain.ShopListRepository
 import java.lang.RuntimeException
+import javax.inject.Inject
 import kotlin.random.Random
 
-class ShopListRepositoryImpl: ShopListRepository {
+class ShopListRepositoryImpl @Inject constructor(private val shopDao: ShopDao):
+    ShopListRepository  {
 
 
 //    private val shopList = sortedSetOf<ShopItem>({
@@ -39,26 +42,26 @@ class ShopListRepositoryImpl: ShopListRepository {
 //    }
 
     override suspend fun addShopItem(shopItem: ShopItem) {
-        App.dataBase.shopListDao().addShopItem(mapper.mapEntityToDbModel(shopItem))
+        shopDao.addShopItem(mapper.mapEntityToDbModel(shopItem))
     }
 
 
 
     override fun getShopList(): LiveData<List<ShopItem>> =Transformations.map(
-        App.dataBase.shopListDao().getShopList()
+        shopDao.getShopList()
     ){
         mapper.mapListDbModelToListEntity(it)
     }
 
     override suspend fun deleteShopItem(shopItem: ShopItem) {
-        App.dataBase.shopListDao().deleteShopItem(shopItem.id)
+        shopDao.deleteShopItem(shopItem.id)
     }
 
     override suspend fun editShopItem(shopItem: ShopItem) {
-        App.dataBase.shopListDao().updateShopItem(mapper.mapEntityToDbModel(shopItem))
+        shopDao.updateShopItem(mapper.mapEntityToDbModel(shopItem))
     }
 
     override suspend fun findShopItem(id:Int): ShopItem {
-      return  mapper.mapDbModelToEntity(App.dataBase.shopListDao().getShopItem(id))
+      return  mapper.mapDbModelToEntity(shopDao.getShopItem(id))
     }
 }
